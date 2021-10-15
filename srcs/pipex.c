@@ -6,7 +6,7 @@
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 17:22:55 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/10/14 19:35:48 by ajimenez         ###   ########.fr       */
+/*   Updated: 2021/10/15 17:43:55 by ajimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@ void	path_cmd(t_pipex *ps, char **envp)
 {
 	ssize_t	i;
 
+
 	i = 0;
-	while (envp[++i])
+	while (envp[i])
 	{
-		if (ft_strncmp("PATH=", envp[i], 5))
+		if (ft_strncmp("PATH=", envp[i], 5) == 0)
 			ps->paths = ft_split(ft_strchr(envp[i], '/'), ':');
-		printf("%s", ps->paths[i]);
+		i++;
 	}
+	ft_putmatrix(ps->paths, 10);
 }
 
 void	get_args(int ac, char **av, t_pipex *ps, char **env)
@@ -37,27 +39,17 @@ void	get_args(int ac, char **av, t_pipex *ps, char **env)
 int	main(int ac, char **av, char *env[])
 {
 	t_pipex	*ps;
-	int		fd[2];
 	int		pid;
-	
-	path_cmd(ps, env);
-	return (0);
+	int		fd1[2];
+	int		fd2[2];
+
 	if (ac != 5)
 		return (0);
-	/*pipe(fd);
+	ps = calloc(sizeof(t_pipex), 1);
 	pid = fork();
-	get_args(ac, av, ps, env);
-	//get_path();
-
-	if (pid != 0)
-	{
+	if (pid > 0)
 		close(ps->fd_1[WRITE_END]);
-	}
-	else
-	{
-		close(ps->fd_1[READ_END]);
-		dup2(fd, STDOUT_FILENO);
-		close(ps->fd[WRITE_END])
-		funcion PATH
-*/
+	path_cmd(ps, env);
+
+	return (0);
 }
