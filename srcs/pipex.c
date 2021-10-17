@@ -6,7 +6,7 @@
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 17:22:55 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/10/17 18:55:54 by ajimenez         ###   ########.fr       */
+/*   Updated: 2021/10/17 19:44:20 by ajimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,15 @@ int	main(int ac, char **av, char *env[])
 {
 	t_pipex	*ps;
 	int		pid;
+	int		s;
 	int		fd1[2];
-	int		fd2[2];
+	int		fd2;
 
+	atexit(leak);
 	if (ac != 5)
 		return (0);
 	ps = calloc(sizeof(t_pipex), 1);
 	get_args(ac, av, ps, env);
 	exec_cmd(ps, env);
-	atexit(leak);
 	return (0);
 }

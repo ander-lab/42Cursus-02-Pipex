@@ -6,7 +6,7 @@
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:34:26 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/10/17 16:14:15 by ajimenez         ###   ########.fr       */
+/*   Updated: 2021/10/17 19:28:53 by ajimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define PIPEX_H
 
 #include "../libft/libft.h"
+#include <fcntl.h>
 
 #define READ_END	0
 #define WRITE_END	1 	
@@ -32,5 +33,6 @@ typedef struct s_pipex{
 **
 */
 char	*path_cmd(t_pipex *ps, char **envp, char *cmd);
+void	exec_cmd(t_pipex *ps, char *env[]);
 
 #endif
