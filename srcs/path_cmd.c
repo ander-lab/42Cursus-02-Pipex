@@ -6,15 +6,15 @@
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 16:13:34 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/10/18 11:50:12 by ajimenez         ###   ########.fr       */
+/*   Updated: 2021/10/18 15:45:52 by ajimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void	ft_open_error(t_pipex *ps)
+void	ft_open_error(char *s, t_pipex *ps)
 {
-	ft_putstr_fd("Can´t open file", 1);
+	ft_putstr_fd(s, 1);
 //	free(ps); si da leaks es probable que sean de aquí
 	exit(1);
 }
@@ -66,14 +66,13 @@ void	ft_exec_cmd1(t_pipex *ps, char **env, int *fd)
 	char	**cmd;
 
 
-	close(fd[READ_END]);
-	ps->fd_1 = open(ps->infile, O_RDONLY);
+	ps->fd_1 = open(ps->infile, O_RDONLY);/*abrir archivo 1*/
 	if (ps->fd_1 == -1)
-		ft_open_error(ps);
-	path = path_cmd(ps, env, ps->cmd_1);
-	cmd = ft_split(ps->cmd_1, ' ');
-	dup2(fd[WRITE_END], STDIN_FILENO);
-	close(ps->fd_1);
+		ft_open_error("error ", ps);
+	path = path_cmd(ps, env, ps->cmd_1);/*recoger comandos*/
+	cmd = ft_split(ps->cmd_1, ' ');/*split del comando por si hay argumentos*/
+	dup2(fd[WRITE_END], STDIN_FILENO);/**/
+	close(fd[WRITE_END]);
 	dup2(ps->fd_2, STDOUT_FILENO);
 	close(ps->fd_1);
 	execve(path, cmd, env);
@@ -85,9 +84,10 @@ void	ft_exec_cmd2(t_pipex *ps, char **env, int *fd)
 	char	**cmd;
 
 
+	close(fd[READ_END]);
 	ps->fd_2 = open(ps->infile, O_RDONLY);
 	if (ps->fd_2 == -1)
-		ft_open_error(ps);
+		ft_open_error("error ", ps);
 	path = path_cmd(ps, env, ps->cmd_2);
 	cmd = ft_split(ps->cmd_2, ' ');
 	dup2(fd[WRITE_END], STDIN_FILENO);

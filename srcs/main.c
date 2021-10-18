@@ -1,42 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/14 17:22:55 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/10/18 15:49:12 by ajimenez         ###   ########.fr       */
+/*   Created: 2021/10/18 15:38:41 by ajimenez          #+#    #+#             */
+/*   Updated: 2021/10/18 15:57:07 by ajimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void	get_args(int ac, char **av, t_pipex *ps, char **env)
-{
-	ps->infile = ft_strdup(av[1]);
-	ps->cmd_1 = ft_strdup(av[2]);
-	ps->cmd_2 = ft_strdup(av[3]);
-	ps->outfile = ft_strdup(av[4]);
-}
-
-void leak()
-{
-	system("leaks -q a.out");
-}
-
-int	main(int ac, char **av, char *env[])
+int	main(int ac, char **av, char **env)
 {
 	t_pipex	*ps;
 	int		pid;
-	int		s;
-	int		fd1[2];
-	int		fd2;
+	int		fd[2];
 
 	if (ac != 5)
 		return (0);
 	ps = calloc(sizeof(t_pipex), 1);
 	get_args(ac, av, ps, env);
+	pipe(fd);
+	pid = fork();
+	if (pid == 0)
+	{
+		close(fd[READ_END]);
+		ft_exec_cmd1(ps, env, fd);
+	}
+	else if (pid > 0)
+	{
+		close(fd[])
+		ft_exec_cmd2(ps, env, fd);
 
-	return (0);
+	}
 }
