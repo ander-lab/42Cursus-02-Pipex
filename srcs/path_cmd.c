@@ -73,18 +73,16 @@ void	ft_exec_cmd1(t_pipex *ps, char **env, int *fd)
 	char	**cmd;
 
 
-	close(fd[0]);
+	close(fd[READ_END]);
 	ps->fd_1 = open(ps->infile, O_RDONLY);/*abrir archivo 1*/
 	if (ps->fd_1 == -1)
 		ft_open_error("error ", ps);
 	path = path_cmd(ps, env, ps->cmd_1);/*recoger comandos*/
 	cmd = ft_split(ps->cmd_1, ' ');/*split del comando por si hay argumentos*/
-	
-
-	dup2(ps->fd_1, 0);
+	dup2(ps->fd_1, STDIN_FILENO);
 	close(ps->fd_1);
-	dup2(fd[1], STDOUT_FILENO);/**/
-	close(fd[1]);
+	dup2(fd[WRITE_END], STDOUT_FILENO);/**/
+	close(fd[WRITE_END]);
 	execve(path, cmd, env);
 }
 
@@ -99,8 +97,8 @@ void	ft_exec_cmd2(t_pipex *ps, char **env, int *fd)
 		ft_open_error("error ", ps);
 	path = path_cmd(ps, env, ps->cmd_2);
 	cmd = ft_split(ps->cmd_2, ' ');
-	dup2(fd[WRITE_END], STDIN_FILENO);
-	close(ps->fd_2);
+	dup2(fd[READ_END], STDOUT_FILENO);
+	close(fd[READ_END]);
 	dup2(ps->fd_2, STDOUT_FILENO);
 	close(ps->fd_2);
 	execve(path, cmd, env);
