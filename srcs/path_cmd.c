@@ -103,3 +103,13 @@ void	ft_exec_cmd2(t_pipex *ps, char **env, int *fd)
 	close(ps->fd_2);
 	execve(path, cmd, env);
 }
+
+void	ft_exec_2child(t_pipex *ps, char **env, int *fd, int pid)
+{
+		close(fd[WRITE_END]);
+		pid = fork();
+		if (pid == 0)
+			ft_exec_cmd2(ps, env, fd);
+		else
+			close(fd[READ_END]);
+}

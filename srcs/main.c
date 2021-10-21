@@ -23,17 +23,15 @@ int	main(int ac, char **av, char **env)
 	ps = calloc(sizeof(t_pipex), 1);
 	get_args(ac, av, ps, env);
 	pipe(fd);/*errores por si aca if(pipe(fd)==-1 return 0)*/
+	if (pipe(fd) == -1)
+			return(0);
 	pid = fork();
 	if (pid == 0)
 	{
-		close(fd[READ_END]);
-		dup2()
 		ft_exec_cmd1(ps, env, fd);
 	}
 	else if (pid > 0)
 	{
-		close(fd[1]);
-		ft_exec_cmd2(ps, env, fd);
-
+		ft_exec_2child(ps, env, fd, pid);
 	}
 }
