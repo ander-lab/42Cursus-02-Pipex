@@ -6,7 +6,7 @@
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:34:26 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/10/18 17:08:23 by ajimenez         ###   ########.fr       */
+/*   Updated: 2021/10/21 17:08:40 by ajimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@
 */
 typedef struct s_pipex{
 	char	**paths;
-	int		fd_1;
-	int		fd_2;
 	char	*infile;
 	char	*outfile;
 	char	*cmd_1;
 	char	*cmd_2;
+	int		fd_1;
+	int		fd_2;
 } t_pipex;
 
 /*
