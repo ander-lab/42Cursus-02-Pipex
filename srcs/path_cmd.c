@@ -6,7 +6,7 @@
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 16:13:34 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/10/22 12:27:30 by ajimenez         ###   ########.fr       */
+/*   Updated: 2021/10/22 12:37:38 by ajimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	ft_open_error(char *s, char *s2, t_pipex *ps)
 {
 	ft_putstr_fd(s, 1);
 	ft_putstr_fd(s2, 1);
-	exit(1); }
+	exit(1); 
+}
 
 char	*path_cmd(t_pipex *ps, char **envp, char *cmd)
 {
@@ -57,14 +58,23 @@ void	get_args(int ac, char **av, t_pipex *ps, char **env)
 	ps->cmd_2 = ft_strdup(av[3]);
 	ps->outfile = ft_strdup(av[4]);
 }
-void	exec_cmd(t_pipex *ps, char *env[])
+void	ft_exec(int i, t_pipex *ps, char *env[])
 {
 	char	*path;
 	char	**cmd;
 
-	path = path_cmd(ps, env, ps->cmd_1);
-	cmd = ft_split(ps->cmd_1, ' ');
-	execve(path, cmd, env);
+	if (i == 1)
+	{
+		path = path_cmd(ps, env, ps->cmd_1);
+		cmd = ft_split(ps->cmd_1, ' ');
+		execve(path, cmd, env);
+	}
+	else if (i == 2)
+	{
+		path = path_cmd(ps, env, ps->cmd_2);
+		cmd = ft_split(ps->cmd_2, ' ');
+		execve(path, cmd, env);
+	}
 }
 
 /* ************************************************************************** */
@@ -89,9 +99,7 @@ void	ft_exec_cmd1(t_pipex *ps, char **env, int *fd)
 	close(ps->fd_1);
 	dup2(fd[WRITE_END], STDOUT_FILENO);/**/
 	close(fd[WRITE_END]);
-	path = path_cmd(ps, env, ps->cmd_1);/*recoger comandos*/
-	cmd = ft_split(ps->cmd_1, ' ');/*split del comando por si hay argumentos*/
-	execve(path, cmd, env);
+	ft_exec(1, ps, env);
 }
 
 void	ft_exec_cmd2(t_pipex *ps, char **env, int *fd)
@@ -99,9 +107,6 @@ void	ft_exec_cmd2(t_pipex *ps, char **env, int *fd)
 	char	*path;
 	char	**cmd;
 
-	//close(fd[READ_END]);
-	path = path_cmd(ps, env, ps->cmd_2);
-	cmd = ft_split(ps->cmd_2, ' ');
 	ps->fd_2 = open(ps->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (ps->fd_2 == -1)
 		ft_open_error("zsh: permision denied: ", ps->outfile, ps);
@@ -109,5 +114,5 @@ void	ft_exec_cmd2(t_pipex *ps, char **env, int *fd)
 	close(fd[READ_END]);
 	dup2(ps->fd_2, STDOUT_FILENO);
 	close(ps->fd_2);
-	execve(path, cmd, env);
+	ft_exec(2, ps, env);
 }
