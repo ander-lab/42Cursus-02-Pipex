@@ -6,7 +6,7 @@
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 16:13:34 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/10/22 17:00:50 by ajimenez         ###   ########.fr       */
+/*   Updated: 2021/10/22 17:53:35 by ajimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,11 @@ char	*path_cmd(t_pipex *ps, char **envp, char *cmd)
 	char	*path;
 	char	*tmp;
 
-	i = 0;
-	while (envp[i])
+	i = -1;
+	while (envp[++i])
 	{
 		if (ft_strncmp("PATH=", envp[i], 5) == 0)
 			ps->paths = ft_split(ft_strchr(envp[i], '/'), ':');
-		i++;
 	}
 	i = 0;
 	while (ps->paths[i])
