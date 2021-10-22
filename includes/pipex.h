@@ -6,18 +6,18 @@
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:34:26 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/10/22 17:39:19 by ajimenez         ###   ########.fr       */
+/*   Updated: 2021/10/22 17:59:00 by ajimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
-#define PIPEX_H
+# define PIPEX_H
 
-#include "../libft/libft.h"
-#include <fcntl.h>
+# include "../libft/libft.h"
+# include <fcntl.h>
 
-#define READ_END	0
-#define WRITE_END	1 	
+# define READ_END	0
+# define WRITE_END	1 	
 
 /*
 ** STRUCTURE
@@ -30,7 +30,7 @@ typedef struct s_pipex{
 	char	*cmd_2;
 	int		fd_1;
 	int		fd_2;
-} t_pipex;
+}	t_pipex;
 
 /*
 ** CMD FUNCTIONS
@@ -44,6 +44,7 @@ void	ft_exec(int i, t_pipex *ps, char *env[]);
 ** GET ARGS
 */
 void	get_args(char **av, t_pipex *ps);
+void	check_call(int ac);
 void	ft_open_error(char *s, char *s2);
 
 #endif
