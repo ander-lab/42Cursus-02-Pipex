@@ -6,7 +6,7 @@
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:38:41 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/10/22 12:39:29 by ajimenez         ###   ########.fr       */
+/*   Updated: 2021/10/22 13:04:20 by ajimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void leak()
 {
-	system("leaks a.out");
+	system("leaks -q a.out");
 }
 
 int	main(int ac, char **av, char **env)
@@ -28,10 +28,10 @@ int	main(int ac, char **av, char **env)
 	if (ac != 5)
 		return (0);
 	ps = calloc(sizeof(t_pipex), 1);
-	get_args(ac, av, ps, env);
 	if(pipe(fd) == -1)
 		return(0);
-	pipe(fd);/*errores por si aca if(pipe(fd)==-1 return 0)*/
+	get_args(ac, av, ps, env);
+	pipe(fd);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -48,4 +48,5 @@ int	main(int ac, char **av, char **env)
 	}
 	wait(&trigger);
 	wait(&trigger);
+	free_ps(ps);
 }
