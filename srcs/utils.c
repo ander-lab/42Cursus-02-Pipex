@@ -6,13 +6,13 @@
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 16:58:56 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/10/22 17:00:26 by ajimenez         ###   ########.fr       */
+/*   Updated: 2021/10/22 17:39:09 by ajimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void	get_args(int ac, char **av, t_pipex *ps, char **env)
+void	get_args(char **av, t_pipex *ps)
 {
 	ps->infile = ft_strdup(av[1]);
 	ps->cmd_1 = ft_strdup(av[2]);
@@ -28,7 +28,7 @@ void	free_ps(t_pipex *ps)
 	free(ps->outfile);
 }
 
-void	ft_open_error(char *s, char *s2, t_pipex *ps)
+void	ft_open_error(char *s, char *s2)
 {
 	ft_putstr_fd(s, 1);
 	ft_putstr_fd(s2, 1);

@@ -6,7 +6,7 @@
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:34:26 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/10/22 16:45:57 by ajimenez         ###   ########.fr       */
+/*   Updated: 2021/10/22 17:39:19 by ajimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void	ft_exec_child_1(t_pipex *ps, char **env, int *fd);
 void	ft_exec_child_2(t_pipex *ps, char **env, int *fd);
 void	free_ps(t_pipex *ps);
 void	ft_exec(int i, t_pipex *ps, char *env[]);
-void	ft_open_error(char *s, char *s2, t_pipex *ps);
 /*
 ** GET ARGS
 */
-void	get_args(int ac, char **av, t_pipex *ps, char **env);
+void	get_args(char **av, t_pipex *ps);
+void	ft_open_error(char *s, char *s2);
 
 #endif
