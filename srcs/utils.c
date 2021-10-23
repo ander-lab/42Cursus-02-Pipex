@@ -6,7 +6,7 @@
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 16:58:56 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/10/22 17:53:53 by ajimenez         ###   ########.fr       */
+/*   Updated: 2021/10/23 10:47:33 by Alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,13 @@
 void	check_call(int ac)
 {
 	if (ac != 5)
-		return ;
+	{
+		ft_putstr_fd("Args should be: $> ./pipex archivo1 comando1 comando2 archivo2", 1);
+		exit(1);
+	}
 }
 
-void	get_args(int ac, char **av, t_pipex *ps)
+void	get_args(char **av, t_pipex *ps)
 {
 	ps->infile = ft_strdup(av[1]);
 	ps->cmd_1 = ft_strdup(av[2]);
