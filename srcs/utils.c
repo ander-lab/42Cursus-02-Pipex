@@ -6,7 +6,7 @@
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 16:58:56 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/10/23 10:47:33 by Alejandro        ###   ########.fr       */
+/*   Updated: 2021/10/23 11:04:58 by Alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	check_call(int ac)
 {
 	if (ac != 5)
 	{
-		ft_putstr_fd("Args should be: $> ./pipex archivo1 comando1 comando2 archivo2", 1);
+		ft_putstr_fd("Args should be: $> ./pipex file1 cmd1 cmd2 file2", 1);
 		exit(1);
 	}
 }
