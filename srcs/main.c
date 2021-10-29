@@ -6,7 +6,7 @@
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:38:41 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/10/22 17:52:00 by ajimenez         ###   ########.fr       */
+/*   Updated: 2021/10/29 13:12:08 by ajimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int ac, char **av, char **env)
 
 	check_call(ac);
 	ps = calloc(sizeof(t_pipex), 1);
-	get_args(ac, av, ps);
+	get_args(av, ps);
 	pipe(fd);
 	pid = fork();
 	if (pid == 0)
