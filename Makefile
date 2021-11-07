@@ -6,7 +6,7 @@
 #    By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/23 12:07:44 by Alejandro         #+#    #+#              #
-#    Updated: 2021/11/07 16:33:44 by ajimenez         ###   ########.fr        #
+#    Updated: 2021/11/07 16:48:02 by ajimenez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS	= ./srcs/main.c ./srcs/utils.c ./srcs/path_cmd.c
 
 OBJS	= $(SRCS:.c=.o)
 COMP	= $(CC) $(LIBP) $(SRCS) -o $(NAME)
+SANCOMP	= $(CC) $(SAN) $(LIBP) $(SRCS) -g3 -o $(NAME)
 
 all: 		$(NAME)
 
@@ -33,6 +34,14 @@ $(NAME):	$(OBJS)
 					@cp libft/libft.a ./$(LIBP)
 					$(LIB) $(LIBP) $(OBJS)
 					$(COMP)
+					@echo "\n\033[1;32mEverything done! ░░░░░░ ＼(>o<)ノ ░░░░░\033[39m\n"
+
+fsanitize:			$(OBJS)
+					@echo "\n\033[33mMaking libft! ░░░░░░ /(ಠ_ಠ)\ ░░░░░\033[39m\n"
+					@make -s -C ./libft
+					@cp libft/libft.a ./$(LIBP)
+					$(LIB) $(LIBP) $(OBJS)
+					$(SANCOMP)
 					@echo "\n\033[1;32mEverything done! ░░░░░░ ＼(>o<)ノ ░░░░░\033[39m\n"
 
 clean:
