@@ -6,7 +6,7 @@
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 16:58:56 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/11/01 11:31:17 by ajimenez         ###   ########.fr       */
+/*   Updated: 2021/11/07 16:28:29 by ajimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	free_ps(t_pipex *ps)
 	free(ps->cmd_2);
 	free(ps->infile);
 	free(ps->outfile);
+	ft_free_matrix(ps->paths);
 }
 
 void	ft_open_error(char *s, char *s2)

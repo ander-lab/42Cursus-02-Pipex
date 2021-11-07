@@ -6,7 +6,7 @@
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:38:41 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/11/07 16:19:02 by ajimenez         ###   ########.fr       */
+/*   Updated: 2021/11/07 16:22:16 by ajimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@
 /*  READ_END      = 0                                                         */
 /* ************************************************************************** */
 
+void lk(void)
+{
+	system("leaks -q pipex");
+}
+
 int	main(int ac, char **av, char **env)
 {
 	t_pipex	*ps;
@@ -26,6 +31,7 @@ int	main(int ac, char **av, char **env)
 	int		fd[2];
 	int		trigger;
 
+	atexit(lk);
 	check_call(ac);
 	ps = calloc(sizeof(t_pipex), 1);
 	get_args(av, ps);
