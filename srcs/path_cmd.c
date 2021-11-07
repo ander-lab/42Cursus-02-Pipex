@@ -6,12 +6,11 @@
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 16:13:34 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/11/04 15:50:17 by ajimenez         ###   ########.fr       */
+/*   Updated: 2021/11/07 16:19:28 by ajimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
-
 
 char	*path_cmd(t_pipex *ps, char **envp, char *cmd)
 {
