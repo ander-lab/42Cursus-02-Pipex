@@ -6,14 +6,14 @@
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:38:41 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/10/29 13:12:08 by ajimenez         ###   ########.fr       */
+/*   Updated: 2021/11/04 15:47:47 by ajimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
 /* ************************************************************************** */
-/*  STDOUT_FILENO = 1                                                         */
+/*  STDOUT_FILENO = 1                                                         */ 
 /*  STDIN_FILENO  = 0                                                         */
 /*  WRITE_END     = 1                                                         */
 /*  READ_END      = 0                                                         */
@@ -30,7 +30,7 @@ int	main(int ac, char **av, char **env)
 	ps = calloc(sizeof(t_pipex), 1);
 	get_args(av, ps);
 	pipe(fd);
-	pid = fork();
+	pid = fork(); 
 	if (pid == 0)
 		ft_exec_child_1(ps, env, fd);
 	else if (pid > 0)
@@ -45,6 +45,7 @@ int	main(int ac, char **av, char **env)
 	wait(&trigger);
 	wait(&trigger);
 	free_ps(ps);
+	while(1);
 	return (0);
 }
 
