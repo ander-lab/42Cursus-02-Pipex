@@ -6,7 +6,7 @@
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:34:26 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/10/29 20:09:56 by ajimenez         ###   ########.fr       */
+/*   Updated: 2021/11/29 11:48:08 by ajimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,13 @@ typedef struct s_pipex{
 ** CMD FUNCTIONS
 */
 char	*path_cmd(t_pipex *ps, char **envp, char *cmd);
-void	ft_exec_child_1(t_pipex *ps, char **env, int *fd);
-void	ft_exec_child_2(t_pipex *ps, char **env, int *fd);
+//void	ft_exec_child_1(t_pipex *ps, char **env, int *fd);
+void	ft_exec_child_1(t_pipex *ps, char **env, int *fd, char **av);
+//void	ft_exec_child_2(t_pipex *ps, char **env, int *fd);
+void	ft_exec_child_2(t_pipex *ps, char **env, int *fd, char **av);
 void	free_ps(t_pipex *ps);
-void	ft_exec(int i, t_pipex *ps, char *env[]);
+//void	ft_exec(int i, t_pipex *ps, char *env[]);
+void	ft_exec_2(char *to_exec, char *env[], t_pipex *ps);
 /*
 ** GET ARGS
 */
