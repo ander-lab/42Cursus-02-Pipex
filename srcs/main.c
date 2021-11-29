@@ -6,7 +6,7 @@
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:38:41 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/11/07 17:04:48 by ajimenez         ###   ########.fr       */
+/*   Updated: 2021/11/29 15:47:34 by ajimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,6 @@
 /*  READ_END      = 0                                                         */
 /* ************************************************************************** */
 
-void lk(void)
-{
-	system("leaks -q pipex");
-}
-
 int	main(int ac, char **av, char **env)
 {
 	t_pipex	*ps;
@@ -31,20 +26,19 @@ int	main(int ac, char **av, char **env)
 	int		fd[2];
 	int		trigger;
 
-	atexit(lk);
 	check_call(ac);
-	ps = ft_calloc(sizeof(t_pipex), 1);
+	ps = calloc(sizeof(t_pipex), 1);
 	get_args(av, ps);
 	pipe(fd);
 	pid = fork();
 	if (pid == 0)
-		ft_exec_child_1(ps, env, fd);
+		ft_exec_child_1(ps, env, fd, av);
 	else if (pid > 0)
 	{
 		close(fd[WRITE_END]);
 		pid = fork();
 		if (pid == 0)
-			ft_exec_child_2(ps, env, fd);
+			ft_exec_child_2(ps, env, fd, av);
 		else
 			close(fd[READ_END]);
 	}
@@ -54,7 +48,7 @@ int	main(int ac, char **av, char **env)
 	return (0);
 }
 
-void	ft_exec_child_1(t_pipex *ps, char **env, int *fd)
+void	ft_exec_child_1(t_pipex *ps, char **env, int *fd, char **av)
 {
 	close(fd[READ_END]);
 	ps->fd_1 = open(ps->infile, O_RDONLY);
@@ -64,10 +58,10 @@ void	ft_exec_child_1(t_pipex *ps, char **env, int *fd)
 	close(ps->fd_1);
 	dup2(fd[WRITE_END], STDOUT_FILENO);
 	close(fd[WRITE_END]);
-	ft_exec(1, ps, env);
+	ft_exec_2(av[2], env, ps);
 }
 
-void	ft_exec_child_2(t_pipex *ps, char **env, int *fd)
+void	ft_exec_child_2(t_pipex *ps, char **env, int *fd, char **av)
 {
 	ps->fd_2 = open(ps->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (ps->fd_2 == -1)
@@ -76,5 +70,5 @@ void	ft_exec_child_2(t_pipex *ps, char **env, int *fd)
 	close(fd[READ_END]);
 	dup2(ps->fd_2, STDOUT_FILENO);
 	close(ps->fd_2);
-	ft_exec(2, ps, env);
+	ft_exec_2(av[3], env, ps);
 }
