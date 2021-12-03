@@ -6,7 +6,7 @@
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:38:41 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/12/03 18:05:28 by ajimenez         ###   ########.fr       */
+/*   Updated: 2021/12/03 18:27:43 by ajimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 static void	ft_open_error(char *s)
 {
-	ft_putstr_fd("zsh: can't open file: ", 2);
+	ft_putstr_fd("zsh: can't open file: ", 1);
 	ft_putstr_fd(s, 2);
 	exit(0);
 }
@@ -63,7 +63,7 @@ int	main(int ac, char **av, char **env)
 
 	if (ac != 5)
 	{
-		ft_putstr_fd("Args should be: $> ./pipex file1 cmd1 cmd2 file2", 2);
+		ft_putstr_fd("Args should be: $> ./pipex file1 cmd1 cmd2 file2", 1);
 		return (0);
 	}
 	pipe(fd);

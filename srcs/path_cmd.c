@@ -6,7 +6,7 @@
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 16:13:34 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/12/03 18:06:07 by ajimenez         ###   ########.fr       */
+/*   Updated: 2021/12/03 18:46:01 by ajimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static char	*path_cmd(char **env, char *cmd)
 	i = 0;
 	path = NULL;
 	env_path = get_path(env);
-	while (env_path)
+	while (env_path[i])
 	{
 		tmp = ft_strjoin(env_path[i], "/");
 		path = ft_strjoin(tmp, ft_split(cmd, ' ')[0]);
@@ -48,7 +48,7 @@ static char	*path_cmd(char **env, char *cmd)
 			return (path);
 		i++;
 	}
-	ft_putstr_fd(ft_strjoin(cmd, " :command not found"), 2);
+	ft_putstr_fd(ft_strjoin(cmd, " :command not found"), STDERR_FILENO);
 	return (0);
 }
 
@@ -63,7 +63,7 @@ void	ft_exec(char *to_exec, char **env)
 		path = cmd[0];
 		if (access(path, X_OK) == -1)
 		{
-			ft_putstr_fd(ft_strjoin(to_exec, ":command not found\n"), 2);
+			ft_putstr_fd(ft_strjoin(to_exec, ": command not found\n"), 2);
 			return ;
 		}
 	}
