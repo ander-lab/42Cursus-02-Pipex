@@ -6,7 +6,7 @@
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 16:13:34 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/12/03 17:46:26 by ajimenez         ###   ########.fr       */
+/*   Updated: 2021/12/03 18:06:07 by ajimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 static char	**get_path(char **env)
 {
 	size_t	i;
-	char 	**path;
+	char	**path;
 
 	i = 0;
 	while (env[i])
@@ -25,7 +25,7 @@ static char	**get_path(char **env)
 		if (ft_strncmp("PATH=", env[i], 5) == 0)
 			path = ft_split(ft_strchr(env[i], '/'), ':');
 		i++;
-	} 
+	}
 	return (path);
 }
 
@@ -57,7 +57,7 @@ void	ft_exec(char *to_exec, char **env)
 	char	*path;
 	char	**cmd;
 
-	cmd =  ft_split(to_exec, ' ');
+	cmd = ft_split(to_exec, ' ');
 	if (ft_strchr(cmd[0], '/'))
 	{
 		path = cmd[0];

@@ -6,7 +6,7 @@
 /*   By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:38:41 by ajimenez          #+#    #+#             */
-/*   Updated: 2021/12/03 17:58:50 by ajimenez         ###   ########.fr       */
+/*   Updated: 2021/12/03 18:05:28 by ajimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,6 @@
 /*  READ_END      = 0                                                         */
 /* ************************************************************************** */
 
-void lk(void)
-{
-	system("leaks -q pipex");
-}
-
-static void	check_call(int ac)
-{
-	if (ac != 5)
-	{
-		ft_putstr_fd("Args should be: $> ./pipex file1 cmd1 cmd2 file2", 2);
-		exit(1);
-	}
-}
-
 static void	ft_open_error(char *s)
 {
 	ft_putstr_fd("zsh: can't open file: ", 2);
@@ -43,7 +29,7 @@ static void	ft_open_error(char *s)
 static void	ft_exec_child_1(char **env, int *fd, char **av)
 {
 	int	fd_1;
-	
+
 	close(fd[READ_END]);
 	fd_1 = open(av[1], O_RDONLY);
 	if (fd_1 == -1)
@@ -75,7 +61,11 @@ int	main(int ac, char **av, char **env)
 	int		fd[2];
 	int		trigger;
 
-	check_call(ac);
+	if (ac != 5)
+	{
+		ft_putstr_fd("Args should be: $> ./pipex file1 cmd1 cmd2 file2", 2);
+		return (0);
+	}
 	pipe(fd);
 	pid = fork();
 	if (pid == 0)
@@ -91,6 +81,5 @@ int	main(int ac, char **av, char **env)
 	}
 	wait(&trigger);
 	wait(&trigger);
-	atexit(lk);
 	return (0);
 }
