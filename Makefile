@@ -6,7 +6,7 @@
 #    By: ajimenez <ajimenez@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/23 12:07:44 by Alejandro         #+#    #+#              #
-#    Updated: 2021/12/03 13:44:45 by ajimenez         ###   ########.fr        #
+#    Updated: 2021/12/03 18:01:30 by ajimenez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIBP	= pipex.a
 
 NAME 	= pipex 
 INCLUDE	= -I./includes/
-SRCS	= ./srcs/main.c ./srcs/utils.c ./srcs/path_cmd.c
+SRCS	= ./srcs/main.c ./srcs/path_cmd.c
 
 OBJS	= $(SRCS:.c=.o)
 COMP	= $(CC) $(LIBP) $(SRCS) -o $(NAME)
